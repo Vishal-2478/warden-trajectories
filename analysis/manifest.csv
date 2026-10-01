@@ -1,0 +1,12 @@
+model,arm,path
+Qwen2.5-7B,inert,data/qwen7b_neutral/episode_features.csv
+Qwen2.5-7B,observation,data/qwen7b_hard450_calibrate/episode_features.csv
+Qwen2.5-7B,salience,data/qwen7b_lexical/episode_features.csv
+Qwen2.5-7B,consequence,data/qwen7b_stakes/episode_features.csv
+Qwen2.5-14B,observation,data/qwen14b_hard450_calibrate/episode_features.csv
+Qwen2.5-14B,consequence,data/qwen14b_stakes/episode_features.csv
+Phi-4,observation,data/phi4_hard450_calibrate/episode_features.csv
+Phi-4,consequence,data/phi4_stakes/episode_features.csv
+Phi-4,inert,data/phi4_neutral/episode_features.csv
+Phi-4,salience,data/phi4_lexical/episode_features.csv
+Qwen2.5-14B,inert,data/qwen14b_neutral/episode_features.csv

@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite the paper below."
+title: "Same Decision, Different Route: code and data"
+authors:
+  - family-names: Mali
+    given-names: Vishal Vijay
+    affiliation: "Department of Information Technology, Dr. B. R. Ambedkar National Institute of Technology Jalandhar"
+  - family-names: Singh
+    given-names: Simranjit
+    affiliation: "Department of Information Technology, Dr. B. R. Ambedkar National Institute of Technology Jalandhar"
+repository-code: "https://github.com/Vishal-2478/warden-trajectories"
+license: MIT
+date-released: 2026-09-30
+preferred-citation:
+  type: conference-paper
+  title: "Same Decision, Different Route: Sensitivity and Specificity of Trajectory Tests for Oversight Effects in Tool-Using Language Model Agents"
+  authors:
+    - family-names: Mali
+      given-names: Vishal Vijay
+    - family-names: Singh
+      given-names: Simranjit
+  year: 2026
+  notes: "Under review. Full citation will be added on publication."
