@@ -1,0 +1,4 @@
+pair_strength=0.5  (smaller = stronger pairing)   n_sims=300
+  false-positive rate at 0.05: {'arm_free': np.float64(0.0), 'did_free': np.float64(0.0), 'arm_paired': np.float64(0.05), 'did_paired': np.float64(0.06)}
+pair_strength=1.0  (smaller = stronger pairing)   n_sims=300
+  false-positive rate at 0.05: {'arm_free': np.float64(0.003), 'did_free': np.float64(0.017), 'arm_paired': np.float64(0.04), 'did_paired': np.float64(0.04)}

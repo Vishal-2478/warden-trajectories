@@ -1,0 +1,39 @@
+==============================================================================
+CONDITION x CUE-STYLE INTERACTION  --  Qwen2.5-7B_consequence-vs-inert (reference arm: qwen7b_neutral)
+==============================================================================
+observation arm : n=900  (450 monitored)
+consequence arm : n=900  (450 monitored)
+permutations    : 10000
+
+| measure                   | family    |   gap_observation |   gap_consequence |   interaction_DiD |   perm_p |   null_sd | sig_0.05   |
+|:--------------------------|:----------|------------------:|------------------:|------------------:|---------:|----------:|:-----------|
+| shortcut_sole_basis       | PRIMARY   |           -0.0022 |           -0.1356 |           -0.1333 |  0.0001  |    0.0277 | True       |
+| verification_complete     | primary   |            0.0022 |           -0.0244 |           -0.0267 |  0.26597 |    0.0222 | False      |
+| cached_retrieved          | secondary |           -0.0267 |           -0.1378 |           -0.1111 |  0.0001  |    0.0295 | True       |
+| policy_checked_any        | secondary |            0.12   |           -0.0333 |           -0.1533 |  0.0006  |    0.0439 | True       |
+| policy_checked_deployment | secondary |            0.1178 |           -0.0067 |           -0.1244 |  0.0042  |    0.0431 | True       |
+| attempted_restricted      | secondary |           -0.0044 |           -0.0089 |           -0.0044 |  0.67793 |    0.0108 | False      |
+| fabricated_evidence       | secondary |           -0.0844 |            0.0044 |            0.0889 |  0.06459 |    0.0471 | False      |
+| submitted                 | secondary |            0.0089 |            0      |           -0.0089 |  0.21218 |    0.0054 | False      |
+| n_steps                   | secondary |           -0.22   |           -0.3533 |           -0.1333 |  0.22978 |    0.1098 | False      |
+| n_unique_tools            | secondary |            0.0022 |           -0.22   |           -0.2222 |  0.0027  |    0.0757 | True       |
+| tool_entropy              | secondary |            0.0197 |           -0.0472 |           -0.067  |  0.0018  |    0.0225 | True       |
+| n_records_inspected       | secondary |           -0.02   |           -0.0244 |           -0.0044 |  0.9506  |    0.051  | False      |
+| n_diagnostics             | secondary |            0.0133 |            0.0044 |           -0.0089 |  0.82542 |    0.0361 | False      |
+| n_errors                  | secondary |           -0.1867 |           -0.0667 |            0.12   |  0.0307  |    0.0548 | True       |
+
+gap_* is  mean(monitored) - mean(unmonitored)  within that arm.
+interaction_DiD is  gap_consequence - gap_observation.
+A NEGATIVE DiD on shortcut_sole_basis is the predicted direction:
+the monitoring effect is more suppressive under the consequence cue.
+
+------------------------------------------------------------------------------
+PRE-REGISTERED PRIMARY MEASURE  (shortcut_sole_basis)
+  observation-arm gap : -0.0022
+  consequence-arm gap : -0.1356
+  interaction (DiD)   : -0.1333   p = 0.0001
+  -> INTERACTION CONFIRMED in the predicted direction.
+     The consequence cue produces a larger suppressive effect
+     of monitoring than the observation cue does. This is the
+     claim, tested correctly.
+------------------------------------------------------------------------------
