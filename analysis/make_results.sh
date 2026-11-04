@@ -15,7 +15,11 @@ python3 analysis/make_figure.py out/nulls.npz out/did.csv results/fig_null.pdf \
   'Phi-4|consequence-inert|matched|free|(c) Phi-4: consequence − inert'
 # ---- revision analyses of the main-study episodes (CIs, power, unigram/trigram,
 #      selection check, stricter verdict rule; Tables II-VI of the revised paper)
-python3 analysis/extract_submissions.py data submissions.csv
+rm -rf raw && mkdir raw            # unpack the raw episodes of the main study
+for f in data/*/raw_episodes.tar.gz; do
+  d="raw/$(basename "$(dirname "$f")")"; mkdir -p "$d"; tar -xzf "$f" -C "$d"
+done
+python3 analysis/extract_submissions.py raw submissions.csv
 python3 analysis/revision_analyses.py analysis/manifest.csv \
   --submissions submissions.csv --perm 10000 --out out_rev
 python3 analysis/make_ieee_tables_v2.py out results out_rev

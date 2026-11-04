@@ -51,9 +51,9 @@ MIG_INSTANCE="${MIG_INSTANCE:-1}"
 MODEL_PATH="${WARDEN_DATA:-$(cat "$HOME/.warden_data_dir" 2>/dev/null || echo "$HOME/warden_data")}/models/$MODEL_DIR"
 export MIG_INSTANCE
 
-# the shared start-up script lives in ~/warden/hpc_h200 (this folder or its parent)
-ENVF="$PBS_O_WORKDIR/_warden_env_h200.sh"
-[ -f "$ENVF" ] || ENVF="$PBS_O_WORKDIR/../_warden_env_h200.sh"
+# the shared start-up script lives in ~/warden/jobs (this folder or its parent)
+ENVF="$PBS_O_WORKDIR/_warden_env_rev.sh"
+[ -f "$ENVF" ] || ENVF="$PBS_O_WORKDIR/../_warden_env_rev.sh"
 source "$ENVF"
 cd "$WARDEN_PROJECT" || exit 1
 

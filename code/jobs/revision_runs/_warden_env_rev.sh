@@ -1,9 +1,9 @@
 # =====================================================================
-# Shared prelude for the H200 PBS jobs. Do not run directly --
-# warden_smoke_h200.pbs and warden_full_h200.pbs both `source` it.
+# Shared prelude for the PBS jobs of the revision runs. Do not run directly --
+# the job scripts in this folder `source` it.
 #
-# WHAT IS DIFFERENT FROM THE H100 VERSION
-#   1. The H200 is split into TWO fixed 71 GB MIG instances whose UUIDs are
+# WHAT IS DIFFERENT FROM code/jobs/_warden_env.sh
+#   1. The GPU is split into TWO fixed 71 GB MIG instances whose UUIDs are
 #      hard-coded by the admin, and PBS does NOT select one for you. If we do
 #      not set CUDA_VISIBLE_DEVICES by hand, torch.cuda.is_available() returns
 #      False and vLLM cannot find a GPU at all. (Manual section 7, step 3.)
@@ -23,17 +23,17 @@ while [ ! -f "$PROJECT/run.py" ] && [ "$PROJECT" != "/" ]; do
 done
 [ -f "$PROJECT/run.py" ] || warden_die \
 "Could not find run.py above $WARDEN_JOBDIR.
-   Submit from inside the project, e.g.  cd ~/warden/hpc_h200 && qsub ..."
+   Submit from inside the project, e.g.  cd ~/warden/jobs && qsub ..."
 export WARDEN_PROJECT="$PROJECT"
 echo "project  : $WARDEN_PROJECT"
 
 # --- 1. conda ----------------------------------------------------------
 # Job scripts do not read your login profile, so conda must be sourced by hand.
 CONDA_SH="$(cat "$HOME/.warden_conda_sh" 2>/dev/null || echo "$HOME/miniconda3/etc/profile.d/conda.sh")"
-[ -f "$CONDA_SH" ] || warden_die "conda.sh not found at $CONDA_SH. Run setup_once_h200.sh on the login node first."
+[ -f "$CONDA_SH" ] || warden_die "conda.sh not found at $CONDA_SH. Run setup_once.sh on the login node first."
 # shellcheck disable=SC1090
 source "$CONDA_SH"
-conda activate warden || warden_die "conda env 'warden' missing. Run setup_once_h200.sh first."
+conda activate warden || warden_die "conda env 'warden' missing. Run setup_once.sh first."
 export PYTHONNOUSERSITE=1
 export TOKENIZERS_PARALLELISM=false
 
@@ -61,14 +61,14 @@ echo "data dir : $WARDEN_DATA"
 [ -f "$MODEL_PATH/config.json" ] || warden_die \
 "Model not found at $MODEL_PATH
    Download it on the LOGIN NODE first:
-       cd ~/warden/hpc_h200 && bash setup_once_h200.sh $MODEL_NAME"
+       cd ~/warden/jobs && bash setup_once.sh $MODEL_NAME"
 
 # --- 4. pick a MIG instance -- REQUIRED on this machine ----------------
-# The September UUIDs are tried first. If the admin has re-partitioned the GPU
-# since then, the MIG instances currently listed by nvidia-smi are used instead
+# Machine-specific MIG UUIDs were removed for publication; put yours here. If they
+# are not found, the MIG instances listed by nvidia-smi are used instead
 # (instance 1 = first listed, instance 2 = second), and with no MIG the whole GPU.
-MIG_1="MIG-b02abca5-0463-519c-b00a-1ce0f2d92d0f"
-MIG_2="MIG-f16cf8df-3c0b-574f-be7b-aed6b44bf220"
+MIG_1="MIG-REPLACE-WITH-UUID-OF-INSTANCE-1"
+MIG_2="MIG-REPLACE-WITH-UUID-OF-INSTANCE-2"
 echo "=== GPU instances on this node ==="
 LIST="$(nvidia-smi -L)" || warden_die "nvidia-smi failed -- this job did not get a GPU. Check the select= line has ngpus=1."
 echo "$LIST"
@@ -79,7 +79,7 @@ else
     NOW="$(echo "$LIST" | grep -o 'MIG-[0-9a-f-]*' | sed -n "${MIG_IDX}p")"
     if [ -n "$NOW" ]; then
         export CUDA_VISIBLE_DEVICES="$NOW"
-        echo "(the September MIG id is gone; using the current MIG instance $MIG_IDX instead)"
+        echo "(the MIG id above was not found; using the listed MIG instance $MIG_IDX instead)"
     else
         export CUDA_VISIBLE_DEVICES=0
         echo "(no MIG instances on this node now; using the whole GPU 0)"
@@ -133,7 +133,7 @@ for i in $(seq 1 150); do
         echo
         echo "COMMON CAUSES ON THIS MACHINE:"
         echo "  'no GPU' / cuda not available -> the MIG UUID is wrong. Compare the"
-        echo "        nvidia-smi -L output above with MIG_1/MIG_2 in _warden_env_h200.sh"
+        echo "        nvidia-smi -L output above with MIG_1/MIG_2 in _warden_env_rev.sh"
         echo "  'ninja ... non-zero exit'     -> a JIT compile failed. We already set"
         echo "        VLLM_USE_FLASHINFER_SAMPLER=0; send me the log if it persists."
         echo "  'Name or service not known'   -> something tried to reach the internet"

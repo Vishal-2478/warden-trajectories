@@ -136,3 +136,12 @@ the order in which items were recorded; item numbers are not contiguous in time.
     comparison against that arm (note b in its tables, set automatically by
     `analysis/make_ieee_tables.py` from the check file) and bases its conclusions
     on Qwen2.5-7B and Phi-4, whose control-cue checks returned UNKNOWN throughout.
+26. **First submission of the revision runs ran 3 episodes instead of 450
+    (November 2026).** The start-up script of the revision runs used a shell variable named `N`
+    for the GPU partition index, which overwrote `N=450` in the job scripts.
+    Found in the run logs. Those test outputs were set aside and are not in
+    `data/`; the variable was renamed (`MIG_IDX`) and all seven runs were
+    submitted again. Every released revision run contains 1,350 episodes.
+27. **Revision runs on the second GPU partition failed at start-up.** Jobs sent
+    to the second GPU partition received no device and stopped; they
+    were rerun on the first partition. Only the complete reruns are released.
