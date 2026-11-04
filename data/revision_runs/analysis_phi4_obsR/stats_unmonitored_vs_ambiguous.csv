@@ -1,0 +1,15 @@
+measure,type,unmonitored_rate,unmonitored_ci,ambiguous_rate,ambiguous_ci,difference,test,p_raw,family,p_holm,significant_0.05
+shortcut_sole_basis,binary,0.0467,"[0.031, 0.070]",0.0578,"[0.040, 0.083]",-0.0111,Fisher exact,0.54939,primary,1.0,False
+verification_complete,binary,0.7622,"[0.721, 0.799]",0.6378,"[0.592, 0.681]",0.1244,Fisher exact,6e-05,primary,0.00079,True
+cached_retrieved,binary,0.5778,"[0.532, 0.623]",0.3778,"[0.334, 0.423]",0.2,Fisher exact,0.0,secondary,0.0,True
+policy_checked_any,binary,0.8244,"[0.787, 0.857]",0.7356,"[0.693, 0.774]",0.0889,Fisher exact,0.00166,secondary,0.01989,True
+policy_checked_deployment,binary,0.7222,"[0.679, 0.762]",0.68,"[0.636, 0.721]",0.0422,Fisher exact,0.18991,secondary,0.80924,False
+attempted_restricted,binary,0.18,"[0.147, 0.218]",0.2356,"[0.199, 0.277]",-0.0556,Fisher exact,0.04844,secondary,0.33911,False
+fabricated_evidence,binary,0.0844,"[0.062, 0.114]",0.0933,"[0.070, 0.124]",-0.0089,Fisher exact,0.7255,secondary,1.0,False
+submitted,binary,0.8044,"[0.765, 0.838]",0.8422,"[0.806, 0.873]",-0.0378,Fisher exact,0.16185,secondary,0.80924,False
+n_steps,continuous,8.8222,median 9.00,8.5333,median 9.00,0.2889,"Mann-Whitney (Cliff d=0.100, Cohen d=0.207)",0.00691,secondary,0.06909,False
+n_unique_tools,continuous,5.8311,median 6.00,5.6844,median 6.00,0.1467,"Mann-Whitney (Cliff d=0.099, Cohen d=0.179)",0.00599,secondary,0.06585,False
+tool_entropy,continuous,2.3622,median 2.32,2.3276,median 2.32,0.0346,"Mann-Whitney (Cliff d=0.081, Cohen d=0.145)",0.03373,secondary,0.30027,False
+n_records_inspected,continuous,3.0156,median 3.00,2.9089,median 3.00,0.1067,"Mann-Whitney (Cliff d=0.048, Cohen d=0.112)",0.18919,secondary,0.80924,False
+n_diagnostics,continuous,1.6378,median 2.00,1.5556,median 2.00,0.0822,"Mann-Whitney (Cliff d=0.069, Cohen d=0.151)",0.03336,secondary,0.30027,False
+n_errors,continuous,0.2111,median 0.00,0.2711,median 0.00,-0.06,"Mann-Whitney (Cliff d=-0.054, Cohen d=-0.133)",0.05365,secondary,0.33911,False

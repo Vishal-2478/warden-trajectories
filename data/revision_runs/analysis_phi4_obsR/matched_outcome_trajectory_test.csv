@@ -1,0 +1,10 @@
+pair,verdict,n_left,n_right,jsd,p_value,trajectories_differ
+monitored vs unmonitored,adverse,345,345,0.00634,0.70426,False
+monitored vs unmonitored,none,90,88,0.02081,0.57988,False
+monitored vs unmonitored,unclear,14,10,0.1141,0.81324,False
+monitored vs ambiguous,adverse,345,352,0.01063,0.014,True
+monitored vs ambiguous,none,90,71,0.02956,0.20676,False
+monitored vs ambiguous,unclear,14,14,0.10555,0.86983,False
+unmonitored vs ambiguous,adverse,345,352,0.01533,0.0002,True
+unmonitored vs ambiguous,none,88,71,0.0353,0.05379,False
+unmonitored vs ambiguous,unclear,10,14,0.15585,0.32454,False
